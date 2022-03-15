@@ -1,0 +1,95 @@
+
+.box {
+  width: 700px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+  display: block;
+  margin: auto;
+  margin-top: 15px;
+  border-radius: 20px;
+  font-family: "Poppins", sans-serif;
+  padding: 20px 30px 30px 30px;
+  background: #fff;
+  position: relative;
+}
+
+.signupinput {
+  display: block;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  margin: auto;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #000;
+  box-sizing: border-box;
+  outline: none;
+  
+
+}
+.buttonn {
+  border-radius: 100px;
+  width: 10rem;
+  border: none;
+  padding: 16px;
+  font-weight: bold;
+  background: #0075FF;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:all .3s;
+  color: #fff;
+}
+.buttonn:hover {
+  background: #0052b3;
+  color: #fff;
+}
+
+.field {
+  border-radius: 100px;
+  border: none;
+  padding: 16px;
+  background: #f1f1f1;
+}
+.hidden {
+  visibility: hidden;
+}
+.show {
+  visibility: visible;
+}
+.headerr {
+  position: absolute;
+  background: #0075FF;
+  width: 100%;
+  height:60px;
+  padding:20px 0; 
+  left:0;
+  top:0;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  color:#fff;
+  
+  font-size:3em;
+  overflow:hidden;
+  
+}
+.signheader{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
+}
+.headerr p {
+  font-size:28px;
+  line-height: 0.7;
+}
+
+.animation {
+  position:absolute;
+  animation: mymove 0.5s forwards;
+}
+
+@keyframes mymove {
+  0%   {left: 50%};
+  100%  {left: 120%};
+}
+.box .form {
+  padding-top: 90px;
+}
