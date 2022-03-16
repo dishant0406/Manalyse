@@ -1,5 +1,5 @@
 import { createContext, useReducer, useEffect } from 'react'
-import { projectAuth } from '../firebase/config'
+import { projectAuth, projectFirestore } from '../firebase/config'
 
 export const AuthContext = createContext()
 
@@ -17,23 +17,24 @@ export const authReducer = (state, action) => {
 }
 
 export const AuthContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(authReducer, { 
+  const [state, dispatch] = useReducer(authReducer, {
     user: null,
     authIsReady: false
   })
 
   useEffect(() => {
-    const unsub = projectAuth.onAuthStateChanged(user => {
+    const unsub = projectAuth.onAuthStateChanged(async user => {
       dispatch({ type: 'AUTH_IS_READY', payload: user })
+      await projectFirestore.collection('users').doc(user.uid).update({ online: true });
       unsub()
     })
   }, [])
 
   console.log('AuthContext state:', state)
-  
+
   return (
     <AuthContext.Provider value={{ ...state, dispatch }}>
-      { children }
+      {children}
     </AuthContext.Provider>
   )
 
