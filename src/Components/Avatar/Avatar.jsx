@@ -1,8 +1,11 @@
 import React from 'react'
+import './Avatar.css';
 
-const Avatar = () => {
+const Avatar = ({src}) => {
   return (
-    <div>Avatar</div>
+    <div className='avatar'>
+      <img src={src} alt='user avatar'/>
+    </div>
   )
 }
 

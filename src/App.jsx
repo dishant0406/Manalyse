@@ -14,13 +14,16 @@ import Dashboard from './Pages/Dashboard/Dashboard'
 import Signup from './Pages/Signup/Signup'
 import Project from './Pages/Project/Project'
 import Navbar from './Components/NavBar/Navbar'
-import Sideabar from './Components/SideBar/Sideabar'
+import Sideabar from './Components/SideBar/Sideabar';
+import OnlineUsers from './Components/OnlineUsers/OnlineUsers';
+import { Toaster } from 'react-hot-toast';
 
 const App = () => {
   const { user, authIsReady } = useAuthContext();
 
   return (
     <>
+    {!authIsReady  &&  <div className="ui active text loader" bis_skin_checked="1">Loading...</div>}
     {authIsReady && (
       <BrowserRouter>
       <Navbar/>
@@ -52,7 +55,9 @@ const App = () => {
         </Route>
       </Switch>
       </div>
+      {user && <OnlineUsers/>}
       </div>
+      <Toaster/>
       </BrowserRouter>
       )}
     </>

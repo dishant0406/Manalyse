@@ -1,0 +1,17 @@
+.onlineavatar{
+  margin: 0;
+}
+.onlinemarker{
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background-color: rgb(48, 228, 48);
+  margin-right: 10px;
+}
+.offlinemarker{
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background-color: red;
+  margin-right: 10px;
+}

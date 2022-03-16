@@ -2,14 +2,20 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import './Sidebar.css';
 import { useLogout } from '../../hooks/useLogout';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import Avatar from '../Avatar/Avatar';
 
 const Sideabar = () => {
     const {logout, isPending} = useLogout();
+    const {user} = useAuthContext();
+
   return (
     <div className='sideebar'>
     <nav className="sidebar">
 
         <div className="menu-bar">
+        {user && <Avatar src={user.photoURL}/>}
+        {user && <span className='text nav-text' style={{margin: '0 auto'}}>{`Welcome! ${user.displayName}`}</span>}
             <div className="menu">
 
                 <li className="search-box">

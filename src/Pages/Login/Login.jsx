@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import './Login.css'
-import toast, {Toaster} from 'react-hot-toast'
+import toast from 'react-hot-toast'
 import { useLogin } from '../../hooks/useLogin'
 
 const Login = () => {
@@ -48,7 +48,6 @@ const Login = () => {
  
 </div>
 
-<Toaster />
 </>
   )
 }
