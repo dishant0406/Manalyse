@@ -33,7 +33,7 @@ const Signup = () => {
   const handleSubmit = e =>{
     e.preventDefault();
 
-    signup(email, password, displayname, thumbnail);
+    thumbnail && signup(email, password, displayname, thumbnail);
     console.log('hello');
   }
   
@@ -78,21 +78,21 @@ const Signup = () => {
   
   <form className="form" onSubmit={handleSubmit}>
   
-    <label htmlFor='email'>Email
+    <label htmlFor='email'>Email*
   <input name='email' className='signupinput field' type="email" placeholder="Your Email" onChange={e=>setEmail(e.target.value)} value={email}/>
   </label>
-  <label htmlFor='username'>Name
+  <label htmlFor='username'>Name*
   <input  name='username' className='signupinput field' type="text" placeholder="Full Name"  onChange={e=>setDisplayName(e.target.value)} value={displayname}/>
   </label>
-  <label htmlFor='Password'>Password
+  <label htmlFor='Password'>Password*
   <input  name='Password' className='signupinput field' type="password" placeholder="Password"  onChange={e=>setPassword(e.target.value)} value={password} />
   </label>
-  <label htmlFor='Avatar'>Profile Photo</label>
+  <label htmlFor='Avatar'>Profile Photo*</label>
   <div>
     <label htmlFor="file" className="ui icon button">
         <i className="file icon"></i>
         {filename==='' ? 'Choose Photo' : filename}</label>
-    <input type="file" id="file" style={{display: 'none'}} onChange={handleFileChange}/>
+    <input type="file" required id="file" style={{display: 'none'}} onChange={handleFileChange}/>
 </div>
 
   {!isPending  && <button type="submit" className="buttonn signupinput"> Signup </button>}
