@@ -2,6 +2,11 @@ import React, { useEffect, useState } from 'react'
 import './Create.scss';
 import Select from 'react-select';
 import { useCollection } from '../../hooks/useCollection';
+import toast from 'react-hot-toast';
+import { useAuthContext } from '../../hooks/useAuthContext';
+import { timestamp } from '../../firebase/config';
+import { useFirestore } from '../../hooks/useFirestore';
+import {useHistory} from 'react-router-dom';
 
 const categories = [
   {value: 'development', label: 'Development'},
@@ -19,10 +24,54 @@ const Create = () => {
   const [assignedUsers, setAssignedUsers] = useState([]);
   const {documents} = useCollection('users');
   const [users, setUsers] = useState('');
+  const [formError, setFormError] = useState(null);
+  const {user} = useAuthContext();
+  const {addDocument, response} = useFirestore('projects');
+  const history = useHistory();
 
-  const handleSubmit = (e)=>{
+  const handleSubmit = async (e)=>{
     e.preventDefault();
-    console.log(name, details, dueDate, category, assignedUsers);
+    setFormError(null);
+
+    if(!category){
+      setFormError('Please Select a Category')
+      return;
+    }
+    if(assignedUsers.length < 1){
+      setFormError('Please assign project to atleast one user')
+      return;
+    }
+    
+    const createdBy = {
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      id: user.uid
+    }
+
+    const assignedUsersList = assignedUsers.map(el=>{
+      return {
+        displayName: el.value.displayName,
+        photoURL: el.value.photoURL,
+        id: el.value.id
+      }
+    })
+
+    const project = {
+      name,
+      details,
+      category,
+      dueDate: timestamp.fromDate(new Date(dueDate)),
+      comments: [],
+      createdBy,
+      assignedUsersList,
+    }
+
+    await addDocument(project);
+    
+    if(!response.error){
+      toast.success('Project Added Successfully!');
+      history.push('/')
+    }
   }
 
   useEffect(() => {
@@ -35,6 +84,15 @@ const Create = () => {
     }
     
   }, [documents])
+
+  useEffect(() => {
+    formError &&  toast.error(formError, {style: {
+      border: '1px solid #ff0000',
+      padding: '16px',
+      color: '#fff',
+      backgroundColor: '#FF0000'
+    }});
+  }, [formError]);
   
 
 
