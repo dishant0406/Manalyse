@@ -1,16 +1,16 @@
 .page-contain {
   display: flex;
-  min-height: 100vh;
   justify-content: center;
   border: .75em solid white;
   font-family: 'Open Sans', sans-serif;
+  flex-wrap: wrap;
 }
 
 .data-card {
   display: flex;
   flex-direction: column;
   width: 20.75em;
-  max-height: 20.75em;
+  min-height: 20.75em;
   border-radius: .5em;
   text-decoration: none;
   background: white;
